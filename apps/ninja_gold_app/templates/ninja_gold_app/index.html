@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ninja Gold</title>
+</head>
+<body>
+	<div id="wrapper" style="width: 1080px; padding: 40px;">
+		<div id="gold">
+			<p style="display: inline-block;">Your Gold: </p>
+			<input type="number" name="gold_score" value="{{ request.session.gold_score }}" style="display: inline-block; text-align: center; padding-left: 10px;  " min="0" max="99999999" readonly>
+		</div>
+		<div>
+			<div id="farm" style="display: inline-block; width: 200px; height: 200px; border: 2px solid black; text-align: center; vertical-align: top; margin-right: 20px;">
+				<h2>Farm</h2>
+				<p>(earns 10-20 gold)</p>
+				<form action='/gold' method="post">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="farm">
+					<input type="submit" value="Find Gold!" style="border: 1px solid black; box-shadow: 2px 2px;">
+				</form>
+			</div>
+			<div id="cave" style="display: inline-block; width: 200px; height: 200px; border: 2px solid black; text-align: center; margin-right: 20px;">
+				<h2>Cave</h2>
+				<p>(earns 5-10 gold)</p>
+				<form action='/gold' method="post">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="cave">
+					<input type="submit" value="Find Gold!" style="border: 1px solid black; box-shadow: 2px 2px;">
+				</form>
+			</div>
+			<div id="house" style="display: inline-block; width: 200px; height: 200px; border: 2px solid black; text-align: center; margin-right: 20px;">
+				<h2>House</h2>
+				<p>(earns 2-5 gold)</p>
+				<form action='/gold' method="post">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="house">
+					<input type="submit" value="Find Gold!" style="border: 1px solid black; box-shadow: 2px 2px;">
+				</form>
+			</div>
+			<div id="casino" style="display: inline-block; width: 200px; height: 200px; border: 2px solid black; text-align: center;">
+				<h2>Casino</h2>
+				<p>(earns/takes 0-50 gold)</p>
+				<form action='/gold' method="post">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="casino">
+					<input type="submit" value="Find Gold!" style="border: 1px solid black; box-shadow: 2px 2px;">
+				</form>
+			</div>
+		</div>
+		<div>
+			<p>Activities:</p>
+			<textarea style="width: 888px; height: 200px; padding: 10px; border: 2px solid black; resize: none; box-sizing: border-box; overflow-y: scroll;" readonly>{{ request.session.activity }}</textarea>
+		</div>
+			<form action='/reset' method="post">
+				{% csrf_token %}
+				<input type="submit" value="Start over?" style="border: 1px solid black; box-shadow: 2px 2px; margin-top: 10px">
+			</form>
+	</div>
+</body>
+</html>
